@@ -5,7 +5,7 @@ var React = require('react');
 var Hello = React.createClass({displayName: "Hello",
 	render: function(){
 		return (React.createElement("div", null, 
-			"Hell ", this.props.name, "!!" 
+			"Hell ", this.props.name
 			)
 		       )
 	}
