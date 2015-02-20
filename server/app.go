@@ -15,7 +15,8 @@ func main() {
 	})
 
 	//static
-	g.Static("/static", "./public")
+	g.Static("/static", "./server/public")
+	//g.Use(static.Serve("/",static.LocalFile("")))
 
 	g.Run(":3000")
 }

@@ -1,0 +1,20 @@
+{
+  "name": "goblog",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kodi0/goblog",
+  "authors": [
+    "Roman <felixcon@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

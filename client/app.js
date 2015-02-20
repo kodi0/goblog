@@ -4,7 +4,7 @@ var React = require('react');
 var Hello = React.createClass({
 	render: function(){
 		return (<div>
-			Hell {this.props.name} 
+			Hell {this.props.name} !!!!!!! 
 			</div>
 		       )
 	}
