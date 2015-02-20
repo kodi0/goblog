@@ -9,7 +9,7 @@ func main() {
 	g := gin.Default()
 	g.LoadHTMLGlob("templates/*")
 
-	// api
+	// api v1
 	g.GET("/", func(c *gin.Context) {
 		obj := gin.H{"title": "Home"}
 		c.HTML(200, "index.tmpl", obj)
