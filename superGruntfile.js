@@ -4,11 +4,32 @@ module.exports = function(grunt){
     browserify: {
       dist: {
         files: {  
-          './server/public/dist/js/bundle.js': ['client/app.js']
+          './client/components.js': ['client/app.js']
 	      },
 	      options: {
 	        transform: ['reactify']
 	      }
+      }
+    },
+    concat: {
+      options: {
+        separator: ';',
+      },
+      dist:{
+        src: ['./client/bower_components/dist/jquery.js',
+              './client/bower_components/materialize/dist/js/materialize.js',
+              './client/components.js'],
+        dest: './client/bundle.js'
+      }
+    },
+    uglify: {
+      my_target: {
+        options: {
+          mangle: false,
+        },
+        files: {
+          './server/public/dist/js/bundle.min.js': ['./client/bundle.js']
+        }
       }
     },
     watch: {
@@ -30,5 +51,5 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-watch')
 
   grunt.registerTask('default', ['watch'])
-  grunt.registerTask('build',['browserify'])
+  grunt.registerTask('build',['browserify','concat','uglify'])
 }
