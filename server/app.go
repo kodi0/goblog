@@ -1,22 +1,26 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/unrolled/render"
+	"log"
+	"net/http"
 )
 
+//
 func main() {
-	g := gin.Default()
-	g.LoadHTMLGlob("templates/*")
+	r := render.New()
 
-	// api v1
-	g.GET("/", func(c *gin.Context) {
-		obj := gin.H{"title": "Home"}
-		c.HTML(200, "index.tmpl", obj)
+	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		r.HTML(w, http.StatusOK, "index", nil)
 	})
+	//// static files - js,css, img
+	// in html /dist/js/jquery.min.js
+	fs := http.FileServer(http.Dir("public"))
 
-	//static
-	g.Static("/static", "./server/public")
-	//g.Use(static.Serve("/",static.LocalFile("")))
+	// how we access these files
+	// /static/dist/js/jquery.min.js
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
-	g.Run(":3000")
+	log.Println("Listening...")
+	http.ListenAndServe("0.0.0.0:3000", nil)
 }
