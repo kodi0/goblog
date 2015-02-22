@@ -1,4 +1,6 @@
 Blog with Go
+---
+[![Gitter](https://badges.gitter.im/chat.svg)](https://gitter.im/kodi0/goblog-chat)
 
 1. User can create article
 2. User Can update, delete article
