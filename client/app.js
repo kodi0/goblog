@@ -7,6 +7,7 @@ var NotFound = require('./components/notfound.js');
 var App = require('./components/app.js');
 var User = require('./components/user.js');
 
+// Routes
 var routes = (
     <Route handler={App} path="/">
       <DefaultRoute handler={Articles} />
