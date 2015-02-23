@@ -5,13 +5,13 @@ module.exports = function(grunt) {
     browserify: {
       dist: {
         files: {
-            'public/dist/scripts/bundle.js': [
-			  'client/scripts/app.js'
-			]
-	      },
-	      options: {
-	        transform: ['reactify']
-	      }
+          'public/dist/scripts/bundle.js': [
+              'client/scripts/app.js'
+          ]
+        },
+        options: {
+          transform: ['reactify']
+        }
       }
     },
     watch: {
@@ -19,30 +19,30 @@ module.exports = function(grunt) {
         files: ['client/scripts/**/*.js'],
         tasks: ['browserify'],
       },
-	  styles: {
-	    files: ['client/styles/**/*.css'],
-		tasks: ['copy:main']
-	  },
+      styles: {
+        files: ['client/styles/**/*.css'],
+        tasks: ['copy:main']
+      },
       livereload:{
         files: [
-		  'public/dist/scripts/bundle.js'
-		]
+          'public/dist/scripts/bundle.js'
+        ]
       }
     },
-	copy: {
-	  main: {
-	    files: [
-		  {
-			src: 'client/bower_components/normalize-css/normalize.css',
-			dest: 'public/dist/styles/normalize.css'
-	      },
-		  {
-			src: 'client/styles/main.css',
-			dest: 'public/dist/styles/main.css'
-		  }
-		]
-	  }
-	}
+    copy: {
+      main: {
+        files: [
+          {
+            src: 'client/bower_components/normalize-css/normalize.css',
+            dest: 'public/dist/styles/normalize.css'
+          },
+          {
+            src: 'client/styles/main.css',
+            dest: 'public/dist/styles/main.css'
+          }
+        ]
+      }
+    }
   });
   
   grunt.loadNpmTasks('grunt-browserify');

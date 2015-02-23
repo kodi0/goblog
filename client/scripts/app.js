@@ -6,7 +6,7 @@ var Hello = React.createClass({
 		return (<div>
 			Hell {this.props.name} !!!!!!! 
 			</div>
-		       )
+		)
 	}
 })
 

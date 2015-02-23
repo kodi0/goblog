@@ -12,7 +12,7 @@ Should be installed [Node.js](http://nodejs.org/), [Go](http://golang.org/)
 5. Build frontend: `grunt build`
 
 ## Start developing
-1. Start watcher for automatic updating frontend files
+1. Start watcher for automatic updating frontend files: `grunt`
 2. Start server: `npm start`
 
 ## Features
