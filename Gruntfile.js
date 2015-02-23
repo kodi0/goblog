@@ -7,7 +7,7 @@ module.exports = function(grunt){
           './server/public/dist/js/bundle.js': ['client/app.js']
 	      },
 	      options: {
-	        transform: ['reactify']
+	        transform: ['reactify','es6ify']
 	      }
       }
     },
@@ -23,10 +23,8 @@ module.exports = function(grunt){
         }
       }
     }  
-  })
+  });
   grunt.loadNpmTasks('grunt-browserify')
-  grunt.loadNpmTasks('grunt-contrib-concat')
-  grunt.loadNpmTasks('grunt-contrib-uglify')
   grunt.loadNpmTasks('grunt-contrib-watch')
 
   grunt.registerTask('default', ['watch'])

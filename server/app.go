@@ -1,26 +1,27 @@
 package main
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/unrolled/render"
-	"log"
 	"net/http"
 )
 
 //
 func main() {
-	r := render.New()
-
-	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		r.HTML(w, http.StatusOK, "index", nil)
+	//IsDevelopment recompiles template on reload
+	r := render.New(render.Options{
+		IsDevelopment: true,
 	})
-	//// static files - js,css, img
-	// in html /dist/js/jquery.min.js
-	fs := http.FileServer(http.Dir("public"))
+	router := gin.Default()
 
-	// how we access these files
-	// /static/dist/js/jquery.min.js
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	router.GET("/", func(c *gin.Context) {
+		r.HTML(c.Writer, http.StatusOK, "index", nil)
+	})
 
-	log.Println("Listening...")
-	http.ListenAndServe("0.0.0.0:3000", nil)
+	router.Static("static", "./public")
+
+	// Native implementation
+	//fs := http.FileServer(http.Dir("public"))
+	//http.Handle("/static/", http.StripPrefix("/static/", fs))
+	router.Run(":3000")
 }
