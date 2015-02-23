@@ -22,5 +22,6 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	log.Println("Listening...")
+	log.Println("Open 0.0.0.0:3000")
 	http.ListenAndServe("0.0.0.0:3000", nil)
 }

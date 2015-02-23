@@ -1,10 +1,13 @@
-module.exports = function(grunt){
+module.exports = function(grunt) {
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     browserify: {
       dist: {
-        files: {  
-          './server/public/dist/js/bundle.js': ['client/app.js']
+        files: {
+            'server/public/dist/scripts/bundle.js': [
+			  'client/scripts/app.js'
+			]
 	      },
 	      options: {
 	        transform: ['reactify']
@@ -12,23 +15,41 @@ module.exports = function(grunt){
       }
     },
     watch: {
-      client:{
-        files: ['client/**/*.js'],
+      scripts:{
+        files: ['client/scripts/**/*.js'],
         tasks: ['browserify'],
-      },			  
+      },
+	  styles: {
+	    files: ['client/styles/**/*.css'],
+		tasks: ['copy:main']
+	  },
       livereload:{
-        files: ['./public/dist/js/bundle.js','server/app.go'],
-        options: {
-          livereload: true,
-        }
+        files: [
+		  'server/public/dist/scripts/bundle.js',
+		  'server/app.go'
+		]
       }
-    }  
-  })
-  grunt.loadNpmTasks('grunt-browserify')
-  grunt.loadNpmTasks('grunt-contrib-concat')
-  grunt.loadNpmTasks('grunt-contrib-uglify')
-  grunt.loadNpmTasks('grunt-contrib-watch')
+    },
+	copy: {
+	  main: {
+	    files: [
+		  {
+			src: 'client/bower_components/normalize-css/normalize.css',
+			dest: 'server/public/dist/styles/normalize.css'
+	      },
+		  {
+			src: 'client/styles/main.css',
+			dest: 'server/public/dist/styles/main.css'
+		  }
+		]
+	  }
+	}
+  });
+  
+  grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
-  grunt.registerTask('default', ['watch'])
-  grunt.registerTask('build',['browserify'])
+  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('build', ['copy:main', 'browserify']);
 }
