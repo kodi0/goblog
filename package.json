@@ -5,7 +5,7 @@
   "scripts": {
     "start": "go run server/app.go",
     "brw:onchange": "onchange 'client/**/*.jsx' -- npm run brw",
-    "brw": "browserify -t reactify client/app.jsx > public/dist/js/bundle.js",
+    "brw": "browserify -t reactify client/app.jsx > public/dist/js/bundle.js"
   },
   "author": "",
   "license": "ISC",

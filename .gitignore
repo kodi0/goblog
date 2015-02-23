@@ -1,5 +1,5 @@
 *.swp
 /node_modules
-/server/src
-/server/public/dist
+/src
+/public/dist
 /client/bower_components

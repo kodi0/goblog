@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     browserify: {
       dist: {
         files: {
-            'server/public/dist/scripts/bundle.js': [
+            'public/dist/scripts/bundle.js': [
 			  'client/scripts/app.js'
 			]
 	      },
@@ -25,8 +25,7 @@ module.exports = function(grunt) {
 	  },
       livereload:{
         files: [
-		  'server/public/dist/scripts/bundle.js',
-		  'server/app.go'
+		  'public/dist/scripts/bundle.js'
 		]
       }
     },
@@ -35,11 +34,11 @@ module.exports = function(grunt) {
 	    files: [
 		  {
 			src: 'client/bower_components/normalize-css/normalize.css',
-			dest: 'server/public/dist/styles/normalize.css'
+			dest: 'public/dist/styles/normalize.css'
 	      },
 		  {
 			src: 'client/styles/main.css',
-			dest: 'server/public/dist/styles/main.css'
+			dest: 'public/dist/styles/main.css'
 		  }
 		]
 	  }
