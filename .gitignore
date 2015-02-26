@@ -3,3 +3,4 @@
 /src
 /public/dist
 /client/bower_components
+.DS_Store
