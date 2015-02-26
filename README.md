@@ -6,7 +6,7 @@ Should be installed [Node.js](http://nodejs.org/), [Go](http://golang.org/)
 
 ## Preparation to developing
 1. Install globally grunt and bower: `npm i -g grunt`, `npm i -g bower`
-2. Install frontend dependencies: `npm -i`, `bower -i`
+2. Install frontend dependencies: `npm i`, `bower i`
 3. Set GOPATH env variable to project folder
 4. Install backend dependencies: `go get ./...`
 5. Build frontend: `grunt build`
