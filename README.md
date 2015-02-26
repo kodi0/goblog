@@ -1,4 +1,4 @@
-How to install
+How to run
 
 1. ```npm install``` 
 2. ```grunt build``` Builds build.js with ReactJS components
