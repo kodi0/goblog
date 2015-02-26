@@ -1,3 +1,11 @@
+How to install
+
+1. ```npm install``` 
+2. ```grunt build``` Builds build.js with ReactJS components
+2. cd server
+3. Get all the packages ```go get ./...```
+4. Run server ```go run app.go```
+
 Blog with Go
 
 1. User can create article
