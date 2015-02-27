@@ -49,7 +49,8 @@ func main() {
 		if err != nil {
 			log.Println(err)
 		}
-		fmt.Println(articles_result)
+		//fmt.Println(articles_result)
+		r.JSON(c.Writer, http.StatusOK, articles_result)
 	})
 	// Show article
 	api.GET("/article/:id", func(c *gin.Context) {
@@ -63,6 +64,7 @@ func main() {
 			log.Printf("no document found %v\n", err)
 		}
 		fmt.Println(article_result)
+		r.JSON(c.Writer, http.StatusOK, article_result)
 	})
 
 	// Create article POST /api/v1/articles
@@ -75,6 +77,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		r.JSON(c.Writer, http.StatusOK, bson.M{"status": "Document inserted"})
 
 	})
 
