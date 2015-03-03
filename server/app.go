@@ -1,27 +1,104 @@
 package main
 
 import (
-	"github.com/unrolled/render"
-	"log"
-	"net/http"
+	// log "github.com/Sirupsen/logrus"
+	"github.com/gin-gonic/gin"
+	// "github.com/unrolled/render"
+	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
+	// "net/http"
+	"time"
 )
+
+// Post - структура описывающая публикацию для блога
+type Post struct {
+	ID        bson.ObjectId `bson:"_id, omitempty"`
+	Title     string        `json:"title" binding:"required"`
+	Body      string        `json:"body" binding:"required"`
+	AuthorID  bson.ObjectId
+	CreatedAt time.Time
+	UpdatedAt time.Time
+}
+
+func sessionDB() *mgo.Session {
+	session, err := mgo.Dial("127.0.0.1")
+	if err != nil {
+		panic(err)
+	}
+
+	// Optional. Switch the session to a monotonic behavior.
+	session.SetMode(mgo.Monotonic, true)
+
+	defer session.Close()
+
+	return session
+}
+
+var sess *mgo.Session
 
 //
 func main() {
-	r := render.New()
+	router := gin.Default()
 
-	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		r.HTML(w, http.StatusOK, "index", nil)
-	})
-	//// static files - js,css, img
-	// in html /dist/js/jquery.min.js
-	fs := http.FileServer(http.Dir("public"))
+	// Все роутеры
+	sess = sessionDB()
 
-	// how we access these files
-	// /static/dist/js/jquery.min.js
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	router.POST("/article", articleAdd)
+	router.GET("/article/:id", articleGet)
+	router.PUT("/article", articleUpdate)
+	router.DELETE("/article/:id", articleDelete)
+	router.GET("/articles", articlesGetAll)
 
-	log.Println("Listening...")
-	log.Println("Open 0.0.0.0:3000")
-	http.ListenAndServe("0.0.0.0:3000", nil)
+	// Listen and serve on 0.0.0.0:8080
+	router.Run(":8080")
 }
+
+// Добавление статьи
+func articleAdd(c *gin.Context) {
+	var post Post
+
+	c.Bind(&post)
+	post.AuthorID = bson.NewObjectId() // временное решение, потом будет подставляться правильное Id текущего автора
+	post.CreatedAt = time.Now()
+
+	// сохранить в БД
+	article := sess.DB("test").C("article")
+
+	// Insert Datas
+	err := article.Insert(post)
+
+	if err != nil {
+		panic(err)
+	}
+
+}
+
+// Извлечение статьи по id
+func articleGet(c *gin.Context) {
+	c.String(200, "pong")
+}
+
+// Редактирование статьи
+func articleUpdate(c *gin.Context) {
+	c.String(200, "pong")
+}
+
+// Удаление статьи
+func articleDelete(c *gin.Context) {
+	c.String(200, "pong")
+}
+
+// Вывод всех статей с кратким содержанием статьи (140 символов)
+func articlesGetAll(c *gin.Context) {
+	c.String(200, "pong")
+}
+
+// Выводить статьи на главную
+
+// У статьи должен быть автор и время публикации
+
+// Рабочий кабинет со статьями автора
+
+// Регистрация
+
+// Авторизация
