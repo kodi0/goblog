@@ -1,7 +1,6 @@
-package app
+package main
 
 import (
-	"app"
 	"fmt"
 	"io"
 	"net/http"
@@ -10,12 +9,24 @@ import (
 	"testing"
 )
 
+var (
+	server     *httptest.Server
+	reader     io.Reader
+	articleUrl string
+)
+
+func init() {
+	server = httptest.NewServer(???)
+
+	articleUrl = fmt.Sprintf("%s/article", server.URL)
+}
+
 func TestArticleAdd(t *testing.T) {
-	userJson := `{"username": "dennis", "balance": 200}`
+	articleJson := `{"title": "Test post", "body": "Body of the post"}`
 
-	reader = strings.NewReader(userJson)
+	reader = strings.NewReader(articleJson)
 
-	request, err := http.NewRequest("POST", usersUrl, reader)
+	request, err := http.NewRequest("POST", articleUrl, reader)
 
 	res, err := http.DefaultClient.Do(request)
 
